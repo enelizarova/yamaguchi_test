@@ -1,0 +1,77 @@
+:root {
+  --color-ink: #4b4b4b;
+  --color-muted: #737373;
+  --color-page: #d2cbc7;
+  --color-mobile-page: #746d68;
+  --color-stage: #8e8885;
+  --color-card: #c8c1bd;
+  --color-white: #fff;
+  --font-sans: 'Euclid Circular A', Arial, sans-serif;
+  --shadow-pill: 0.6075rem 0.511875rem 0.959375rem -0.191875rem rgb(65 60 57 / 21%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  scroll-behavior: auto;
+}
+
+body {
+  overflow-x: clip;
+  margin: 0;
+  color: var(--color-ink);
+  background: var(--color-mobile-page);
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.intro,
+.outro {
+  display: none;
+}
+
+@media (min-width: 75rem) {
+  :root {
+    --shadow-pill: 0.976875rem 0.823125rem 1.5425rem -0.30875rem rgb(65 60 57 / 21%);
+  }
+
+  body {
+    background: var(--color-page);
+  }
+
+  .intro,
+  .outro {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.875rem;
+    padding: 2rem;
+    text-align: center;
+    background: #ddd6d2;
+  }
+
+  .intro h1,
+  .outro h2 {
+    max-width: 46.875rem;
+    margin: 0;
+    font-size: clamp(2.375rem, 6vw, 5.25rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+}

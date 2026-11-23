@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Демонстрация scroll-слайдера для фена-стайлера" />
+    <title>Фен-стайлер</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <main>
+      <section class="intro" aria-labelledby="intro-title">
+        <h1 id="intro-title">Технологии для красивых волос</h1>
+      </section>
+
+      <section id="story" class="story" data-story-slider aria-label="Преимущества фена-стайлера">
+        <div class="story__stage">
+          <nav class="wheel" aria-label="Навигация по слайдам">
+            <div class="wheel__ring" aria-hidden="true"></div>
+
+            <button
+              class="wheel__item wheel__item--dryer is-active"
+              type="button"
+              aria-current="true"
+            >
+              <span class="wheel__icon" aria-hidden="true">
+                <span class="wheel__glyph"></span>
+              </span>
+              <span class="wheel__label">Фен-стайлер<br />2 в 1</span>
+            </button>
+
+            <button class="wheel__item wheel__item--lightness" type="button">
+              <span class="wheel__icon" aria-hidden="true">
+                <span class="wheel__glyph"></span>
+              </span>
+              <span class="wheel__label">Суперлёгкий</span>
+            </button>
+
+            <button class="wheel__item wheel__item--motor" type="button">
+              <span class="wheel__icon" aria-hidden="true">
+                <span class="wheel__glyph"></span>
+              </span>
+              <span class="wheel__label"
+                >Инновационный<br />
+                японский мотор</span
+              >
+            </button>
+          </nav>
+
+          <div class="slides" aria-live="polite">
+            <article class="slide slide--combo">
+              <header class="slide__heading">
+                <h2>ФЕН и СТАЙЛЕР<br />в уникальном дизайне</h2>
+                <span class="pill">2 в 1</span>
+              </header>
+              <div class="combo-layout">
+                <div class="mini-card">
+                  <span class="tag">Фен</span>
+                  <img class="mini-card__image" src="img/dryer.webp" alt="Укладка волос феном" />
+                </div>
+                <picture class="hero-product">
+                  <source
+                    media="(orientation: landscape) and (max-height: 35rem)"
+                    srcset="img/unique.webp"
+                  />
+                  <source media="(min-width: 75rem)" srcset="img/unique.webp" />
+                  <img src="img/unique-mob.webp" alt="Фен и стайлер рядом с уложенными волосами" />
+                </picture>
+                <div class="mini-card">
+                  <span class="tag tag--light">Стайлер</span>
+                  <img
+                    class="mini-card__image"
+                    src="img/styler.webp"
+                    alt="Укладка волос стайлером"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <article class="slide slide--light">
+              <p class="slide-feature">
+                <span class="slide-feature__icon" aria-hidden="true">
+                  <img src="img/icons/lightness.svg" alt="" />
+                </span>
+                <span
+                  >Лёгкость<br />
+                  и комфорт<br />
+                  в руке</span
+                >
+              </p>
+              <div class="light-layout">
+                <div class="lightness-model-wrap">
+                  <picture class="lightness-model">
+                    <source media="(min-width: 75rem)" srcset="img/lightness.webp" />
+                    <img src="img/lightness-mob.webp" alt="Девушка со стайлером и чашкой кофе" />
+                  </picture>
+                  <span class="lightness-shade" aria-hidden="true"></span>
+                </div>
+                <div class="light-layout__content">
+                  <h2>
+                    Супер<span class="light-title__hyphen" aria-hidden="true">-</span
+                    ><br class="light-title__break" />лёгкий
+                  </h2>
+                  <p class="light-description">
+                    <span>Уменьшает усталость рук</span>
+                    <span>при сушке волос, делая</span>
+                    <span>процедуру удобной и приятной</span>
+                    <span>даже после напряжённого</span>
+                    <span>рабочего дня.</span>
+                  </p>
+                  <span class="pill pill--small">500 г</span>
+                </div>
+              </div>
+              <span class="burst burst--coffee">Не тяжелее<br />чашки кофе</span>
+            </article>
+
+            <article class="slide slide--motor">
+              <p class="slide-feature">
+                <span class="slide-feature__icon" aria-hidden="true">
+                  <img src="img/icons/motor.svg" alt="" />
+                </span>
+                <span
+                  >Инновационный<br />
+                  японский мотор</span
+                >
+              </p>
+              <header class="motor-heading">
+                <h2>
+                  <span class="motor-heading__lead">Для ценителей</span>
+                  <span class="motor-heading__main">
+                    <span>Комфорта</span>
+                    <br class="motor-heading__desktop-break" />
+                    <span>и качества</span>
+                  </span>
+                  <span class="motor-heading__tail">В уходе за волосами</span>
+                </h2>
+              </header>
+              <div class="motor-media">
+                <p class="motor-subtitle">
+                  <span>Бесщёточный</span>
+                  <span>мотор BLDC</span>
+                </p>
+                <img
+                  class="motor-cutaway"
+                  src="img/motor.webp"
+                  alt="Бесщёточный мотор BLDC в разрезе"
+                />
+              </div>
+              <span class="burst burst--power">Салонная<br />мощность</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="outro">
+        <h2>Обычная прокрутка продолжается</h2>
+      </section>
+    </main>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

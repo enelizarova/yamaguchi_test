@@ -1,0 +1,107 @@
+.slide--light,
+.slide--motor {
+  background: var(--color-mobile-page);
+}
+
+.slide-feature {
+  position: relative;
+  z-index: 5;
+  min-height: 6.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.625rem 1.75rem 0.625rem 0.75rem;
+  color: #64605e;
+  border-radius: 3.125rem;
+  background: #e9e8e7;
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.slide-feature__icon {
+  width: 4.75rem;
+  flex: 0 0 4.75rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 0.125rem solid currentcolor;
+  border-radius: 50%;
+}
+
+.slide-feature__icon img {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  filter: brightness(0);
+  opacity: 0.58;
+}
+
+.burst {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 180 / 179;
+  padding: 1rem;
+  color: var(--color-white);
+  isolation: isolate;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.burst::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: url('../img/Star.svg') center / contain no-repeat;
+}
+
+@media (min-width: 40rem) and (max-width: 74.999rem) {
+  .slide-feature {
+    width: fit-content;
+    max-width: calc(100% - 4rem);
+    margin: 2rem auto 0;
+    padding-right: 2.25rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 74.999rem) and (max-height: 35rem) {
+  .slide-feature {
+    min-height: 4.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+    font-size: 1rem;
+  }
+
+  .slide-feature__icon {
+    width: 3.5rem;
+    flex-basis: 3.5rem;
+  }
+
+  .slide-feature__icon img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (min-width: 75rem) {
+  .slide--light,
+  .slide--motor {
+    padding: 0;
+  }
+
+  .slide-feature {
+    display: none;
+  }
+
+  .burst {
+    width: 6.25rem;
+    font-size: 0.625rem;
+  }
+}
