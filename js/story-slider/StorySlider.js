@@ -1,14 +1,27 @@
 import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createSlideTimeline } from './createSlideTimeline.js';
 import { WheelNavigation } from './WheelNavigation.js';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
-const DESKTOP_QUERY = '(min-width: 75rem)';
-const SCRUB = 0.3;
+const DESKTOP_QUERY = '(min-width: 60rem)';
+const SCRUB = 0.15;
 const SCROLL_DISTANCE = 0.8;
+const ANIMATED_ELEMENTS = [
+  '.slides',
+  '.slide',
+  '.hero-product',
+  '.lightness-model',
+  '.motor-cutaway',
+  '.mini-card',
+  '.slide h2',
+  '.light-description',
+  '.motor-subtitle',
+  '.pill',
+  '.burst',
+  '.motor-glow',
+].join(', ');
 
 export class StorySlider {
   constructor(root) {
@@ -17,6 +30,8 @@ export class StorySlider {
     this.slides = gsap.utils.toArray('.slide', root);
     this.wheelItems = gsap.utils.toArray('.wheel__item', root);
     this.media = gsap.matchMedia();
+    this.resizeCall = gsap.delayedCall(0.2, () => ScrollTrigger.refresh()).pause();
+    this.handleResize = () => this.resizeCall.restart(true);
   }
 
   mount() {
@@ -25,10 +40,15 @@ export class StorySlider {
     }
 
     this.media.add(DESKTOP_QUERY, () => this.mountDesktop());
+    window.addEventListener('resize', this.handleResize, { passive: true });
+    window.addEventListener('orientationchange', this.handleResize, { passive: true });
     document.fonts.ready.then(() => ScrollTrigger.refresh());
   }
 
   destroy() {
+    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('orientationchange', this.handleResize);
+    this.resizeCall.kill();
     this.media.revert();
   }
 
@@ -43,6 +63,7 @@ export class StorySlider {
         items: this.wheelItems,
         timeline,
         slideTimes,
+        content: this.stage.querySelector('.slides'),
       });
       timeline.eventCallback('onUpdate', () => navigation.render());
 
@@ -64,6 +85,15 @@ export class StorySlider {
     return () => {
       navigation?.destroy();
       context.revert();
+      this.clearAnimationStyles();
     };
+  }
+
+  clearAnimationStyles() {
+    this.root.querySelectorAll(ANIMATED_ELEMENTS).forEach((element) => {
+      element.style.removeProperty('opacity');
+      element.style.removeProperty('visibility');
+      element.style.removeProperty('transform');
+    });
   }
 }

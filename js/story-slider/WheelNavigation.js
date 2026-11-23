@@ -1,14 +1,14 @@
 const RADIUS = 14.375;
 const STEP = 28 * (Math.PI / 180);
-const NAVIGATION_DURATION = 0.8;
-
 export class WheelNavigation {
-  constructor({ gsap, items, timeline, slideTimes }) {
+  constructor({ gsap, items, timeline, slideTimes, content }) {
     this.gsap = gsap;
     this.items = items;
     this.timeline = timeline;
     this.slideTimes = slideTimes;
+    this.content = content;
     this.handlers = [];
+    this.isNavigating = false;
   }
 
   connect(scrollTrigger) {
@@ -46,8 +46,10 @@ export class WheelNavigation {
   }
 
   destroy() {
+    this.gsap.killTweensOf(this.content);
     this.handlers.forEach((removeHandler) => removeHandler());
     this.handlers = [];
+    this.isNavigating = false;
   }
 
   getPosition() {
@@ -67,16 +69,46 @@ export class WheelNavigation {
   }
 
   scrollTo(index) {
-    const progress = this.slideTimes[index] / this.timeline.duration();
-    const distance = this.scrollTrigger.end - this.scrollTrigger.start;
+    if (this.isNavigating) {
+      return;
+    }
 
-    this.gsap.to(window, {
-      scrollTo: {
-        y: this.scrollTrigger.start + progress * distance,
-        autoKill: true,
-      },
-      duration: NAVIGATION_DURATION,
-      ease: 'power2.inOut',
+    const targetTime = this.slideTimes[index];
+    const progress = targetTime / this.timeline.duration();
+    const distance = this.scrollTrigger.end - this.scrollTrigger.start;
+    const targetScroll = this.scrollTrigger.start + progress * distance;
+
+    const showTarget = () => {
+      window.scrollTo(0, targetScroll);
+      this.scrollTrigger.update();
+      this.scrollTrigger.getTween()?.kill();
+      this.timeline.time(targetTime);
+      this.render();
+
+      this.gsap.fromTo(
+        this.content,
+        { autoAlpha: 0, scale: 1.01 },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.28,
+          ease: 'power2.out',
+          onComplete: () => {
+            this.isNavigating = false;
+          },
+        },
+      );
+    };
+
+    this.isNavigating = true;
+
+    this.gsap.to(this.content, {
+      autoAlpha: 0,
+      scale: 0.99,
+      duration: 0.16,
+      ease: 'power1.out',
+      overwrite: true,
+      onComplete: showTarget,
     });
   }
 }

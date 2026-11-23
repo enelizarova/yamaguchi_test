@@ -44,7 +44,7 @@ img {
   display: none;
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 60rem) {
   :root {
     --shadow-pill: 0.976875rem 0.823125rem 1.5425rem -0.30875rem rgb(65 60 57 / 21%);
   }

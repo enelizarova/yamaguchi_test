@@ -57,7 +57,7 @@
   background: var(--color-white);
 }
 
-@media (orientation: landscape) and (max-width: 74.999rem) and (max-height: 35rem) {
+@media (orientation: landscape) and (max-width: 59.999rem) and (max-height: 35rem) {
   .slide--combo {
     aspect-ratio: 16 / 9;
   }
@@ -118,7 +118,7 @@
   }
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 60rem) {
   .slide--combo {
     aspect-ratio: 31 / 20;
     background:

@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 60rem) {
   .wheel {
     --wheel-ring: #625b56;
     --wheel-button: #746d68;
@@ -129,7 +129,7 @@
   }
 }
 
-@media (min-width: 75rem) and (max-width: 79.999rem) {
+@media (min-width: 60rem) and (max-width: 79.999rem) {
   .wheel {
     left: calc(clamp(3.21875rem, 10vw, 16rem) - 33.25rem);
   }
